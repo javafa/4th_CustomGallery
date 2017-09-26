@@ -63,7 +63,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder>{
                 public void onClick(View view) {
                     Intent intent = new Intent();
                     intent.putExtra("imagePath", uri.getPath());
-
+                    // 이미지 경로는 Thumbnail 이 아닌 원본 이미지의 경로를 넘겨야 한다
                     Activity activity = (Activity) context;
                     activity.setResult(Activity.RESULT_OK, intent);
                     activity.finish();
