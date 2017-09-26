@@ -25,7 +25,7 @@ public class GalleryActivity extends AppCompatActivity {
 
     private void init(){
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        adapter = new GalleryAdapter();
+        adapter = new GalleryAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 

@@ -1,5 +1,8 @@
 package com.veryworks.android.customgallery;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +18,12 @@ import java.util.List;
  */
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder>{
+    Context context;
     List<String> data;
+
+    public GalleryAdapter(Context context){
+        this.context = context;
+    }
 
     public void setData(List<String> data){
         this.data = data;
@@ -43,14 +51,27 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder>{
     }
 
     class Holder extends RecyclerView.ViewHolder{
+        private Uri uri;
         private ImageView imageView;
         private TextView textView;
         public Holder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageItem);
             textView = itemView.findViewById(R.id.textDate);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent();
+                    intent.putExtra("imagePath", uri.getPath());
+
+                    Activity activity = (Activity) context;
+                    activity.setResult(Activity.RESULT_OK, intent);
+                    activity.finish();
+                }
+            });
         }
         public void setImageUri(Uri uri){
+            this.uri = uri;
             imageView.setImageURI(uri);
         }
         public void setDate(String date){

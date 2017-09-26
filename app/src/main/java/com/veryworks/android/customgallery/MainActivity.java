@@ -26,7 +26,8 @@ public class MainActivity extends BaseActivity {
             case REQ_GALLERY:
                 if(resultCode == RESULT_OK) {
                     if(data != null) {
-                        Uri imageUri = data.getData();
+                        String imagePath = data.getStringExtra("imagePath");
+                        Uri imageUri = Uri.parse(imagePath);
                         imageView.setImageURI(imageUri);
                     }
                 }
